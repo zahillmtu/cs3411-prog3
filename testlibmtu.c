@@ -6,11 +6,31 @@
 
 #include "libmtu.h"
 
+void test_mtu_canNegate() {
+
+    int a = 1;
+
+    printf("\n");
+    printf("Running test for mtu_canNegate\n");
+    int result = mtu_canNegate(a);
+    if (result == 1) {
+        printf("mtu_canNegate(1) returned with: %d. Success\n", result);
+    }
+    else {
+        printf("mtu_canNegate(1) returns 1. It returned with: %d. Failure\n", result);
+    }
+
+    return;
+}
+
 int main (void) {
     int fileNumber;
 
     // test function to make sure library is working
     testfunc();
+
+    // Test for mtu_canNegate
+    test_mtu_canNegate();
 
     // Test for mtu_canDivide
     printf("\n");
