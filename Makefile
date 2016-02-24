@@ -4,8 +4,8 @@ CC = gcc
 CCFLAGS = -std=c99 -g -Wall -Wextra
 EXEC = testlibmtu
 OBJS = testlibmtu.o
-CFILES = testfunc.c
-OFILES = testfunc.o
+CFILES = testfunc.c mtu_printFiles.c
+OFILES = testfunc.o mtu_printFiles.o
 
 all: ${EXEC}
 
