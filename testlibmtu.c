@@ -11,7 +11,21 @@ int main (void) {
     // test function to make sure library is working
     testfunc();
 
+    // Test for mtu_qsort
+    printf("\n");
+    printf("Running test for mtu_qsort\n");
+    int listSize = 5;
+    float list[] = {1.0, 6.0, 9.3, 7.8, 2.2};
+    mtu_qsort(list, listSize);
+    for (int i = 0; i < listSize; i++) {
+        printf("%f ", list[i]);
+    }
+    printf("\n");
+
     // Test for mtu_lang
+    printf("\n");
+    printf("Running test for mtu_lang\n");
+
     char* lang;
     if ((lang = mtu_lang()) == NULL) {
         printf("Error reading lang variable - Exiting\n");
@@ -20,13 +34,20 @@ int main (void) {
     printf("LANG variable is %s\n", lang);
 
     // Test for mtu_pairSum
+    printf("\n");
+    printf("Running test for mtu_pairSum\n");
+
     int* pairs;
     pairs = mtu_pairSum(1, 1, 2, 2, 3, 3, 0, 0);
     for (int i = 0; i < 3; i++) {
         printf("Summed pair, index: %d value: %d\n", i, pairs[i]);
     }
+    free(pairs);
 
     // Test for mtu_printFiles(), still may need some work testing
+    printf("\n");
+    printf("Running test for mtu_printFiles\n");
+
     fileNumber = mtu_printFiles();
     printf("printFiles returned with %d\n", fileNumber);
 

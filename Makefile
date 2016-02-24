@@ -4,8 +4,12 @@ CC = gcc
 CCFLAGS = -std=c99 -g -Wall -Wextra
 EXEC = testlibmtu
 OBJS = testlibmtu.o
-CFILES = testfunc.c mtu_printFiles.c mtu_lang.c mtu_pairSum.c
-OFILES = testfunc.o mtu_printFiles.o mtu_lang.o mtu_pairSum.o
+CFILES = \
+    testfunc.c mtu_printFiles.c mtu_lang.c mtu_pairSum.c \
+    mtu_qsort.c
+OFILES = \
+    testfunc.o mtu_printFiles.o mtu_lang.o mtu_pairSum.o \
+    mtu_qsort.o
 
 all: ${EXEC}
 
