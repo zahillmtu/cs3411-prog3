@@ -11,6 +11,14 @@ int main (void) {
     // test function to make sure library is working
     testfunc();
 
+    // Test for mtu_canDivide
+    printf("\n");
+    printf("Running test for mtu_canDivide\n");
+    int diva = 20;
+    int divb = 5;
+    int divans = mtu_canDivide(diva, divb);
+    printf("mtu_canDivide returned with: %d\n", divans);
+
     // Test for mtu_qsort
     printf("\n");
     printf("Running test for mtu_qsort\n");
