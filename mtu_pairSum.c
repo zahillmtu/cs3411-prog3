@@ -1,6 +1,9 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include <stdarg.h>
+#include <limits.h>
 
-int* mtu_pairSum(int a, int b, ...) {
+int* mtu_pairSum(int a, ...) {
 
     int first;
     int second;
@@ -10,9 +13,11 @@ int* mtu_pairSum(int a, int b, ...) {
 
     va_list params;
 
-    va_start(params, b);
-    while (!(first = va_arg(params, int) == 0 &&
-             second = va_arg(params, int) == 0)) {
+    va_start(params, a);
+    first = a;
+    second = va_arg(params, int);
+    while (!((first == 0) &&
+            (second == 0))) {
 
         count = count + 1;
 
@@ -40,7 +45,11 @@ int* mtu_pairSum(int a, int b, ...) {
             temp[count - 1] = first + second;
         }
         free(summedPairs);
-        summedPairs = &temp;
+        summedPairs = temp;
+
+        // get the next values
+        first = va_arg(params, int);
+        second = va_arg(params, int);
     }
     // do it one more time to place zero at the end
     temp = (int*) calloc(count + 1, sizeof(int));
