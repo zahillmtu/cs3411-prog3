@@ -23,16 +23,8 @@ void test_mtu_canNegate() {
     return;
 }
 
-int main (void) {
-    int fileNumber;
+void test_mtu_canDivide() {
 
-    // test function to make sure library is working
-    testfunc();
-
-    // Test for mtu_canNegate
-    test_mtu_canNegate();
-
-    // Test for mtu_canDivide
     printf("\n");
     printf("Running test for mtu_canDivide\n");
     int diva = 20;
@@ -44,8 +36,11 @@ int main (void) {
     else {
         printf("mtu_canDivide(20, 4) returns 1. It returned with: %d. Failure\n", divans);
     }
+    return;
+}
 
-    // Test for mtu_qsort
+void test_mtu_qsort() {
+
     printf("\n");
     printf("Running test for mtu_qsort\n");
     int listSize = 5;
@@ -70,7 +65,11 @@ int main (void) {
         printf("Array is sorted. Success.\n");
     }
 
-    // Test for mtu_lang
+    return;
+}
+
+void test_mtu_lang() {
+
     printf("\n");
     printf("Running test for mtu_lang\n");
 
@@ -87,7 +86,11 @@ int main (void) {
         printf("LANG variable should be %s, but was %s. Failure.\n", langCheck, lang);
     }
 
-    // Test for mtu_pairSum
+    return;
+}
+
+void test_mtu_pairSum(){
+
     printf("\n");
     printf("Running test for mtu_pairSum\n");
 
@@ -107,13 +110,43 @@ int main (void) {
         printf("Summing returned correctly. Success.\n");
     }
     free(pairs);
+    return;
+}
 
-    // Test for mtu_printFiles(), still may need some work testing
+void test_mtu_printFiles() {
+
     printf("\n");
     printf("Running test for mtu_printFiles\n");
 
+    int fileNumber;
     fileNumber = mtu_printFiles();
     printf("printFiles returned with %d\n", fileNumber);
+
+    return;
+}
+
+int main (void) {
+
+    // test function to make sure library is working
+    testfunc();
+
+    // Test for mtu_canNegate
+    test_mtu_canNegate();
+
+    // Test for mtu_canDivide
+    test_mtu_canDivide();
+
+    // Test for mtu_qsort
+    test_mtu_qsort();
+
+    // Test for mtu_lang
+    test_mtu_lang();
+
+    // Test for mtu_pairSum
+    test_mtu_pairSum();
+
+    // Test for mtu_printFiles(), still may need some work testing
+    test_mtu_printFiles();
 
     return 0;
 }
