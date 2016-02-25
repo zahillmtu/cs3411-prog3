@@ -5,13 +5,15 @@
 
 unsigned int mtu_popen() {
 
-    char cmd[1024];
-    // Get the pid number
-    pid_t pidNum = getpid();
+    //char cmd[1024];
+    //// Get the pid number
+    //pid_t pidNum = getpid();
 
-    snprintf(cmd, sizeof(cmd), "ps -p %d -o rss=", pidNum);
+    //snprintf(cmd, sizeof(cmd), "ps -p %d -o rss=", pidNum);
 
-    popen(cmd, no_idea);
+    //popen(cmd, no_idea);
+
+    return 0;
 }
 
 /*
