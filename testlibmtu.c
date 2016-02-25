@@ -6,6 +6,50 @@
 
 #include "libmtu.h"
 
+void test_mtu_writeFileOpen() {
+
+    char filename[] = "openTestFile.txt";
+    char fileData[] = "Print this line to the file just to take up space.\n";
+    int retval;
+    char string1[] = "string1";
+    char string2[] = "string2";
+    int seekamt = 30;
+    int delret;
+
+    printf("\n");
+    printf("Running test for mtu_writeFileOpen\n");
+
+    // create a file to write to
+    FILE* fp = fopen(filename, "w+");
+    if (fp == NULL) {
+        printf("Error creating a file for testing - Exiting\n");
+        exit(EXIT_FAILURE);
+    }
+
+    // write a bunch of stuff to the file
+    for (int i = 0; i < 15; i++) {
+        fputs(fileData, fp);
+    }
+    // close the file to allow function to access it
+    fclose(fp);
+
+    // call mtu_writeFileOpen
+    retval = mtu_writeFileOpen(filename, string1, seekamt, string2);
+    if (retval == 0) {
+        printf("mtu_writeFileOpen returns 1. It returned with %d. Failure.\n", retval);
+    }
+    else {
+        printf("mtu_writeFileOpen return %d. Success.\n", retval);
+    }
+
+    // delete the file
+    delret = remove(filename);
+    if (delret == -1) {
+        printf("Error deleting file - Exiting\n");
+        exit(EXIT_FAILURE);
+    }
+}
+
 void test_mtu_canNegate() {
 
     int a = 1;
@@ -129,6 +173,9 @@ int main (void) {
 
     // test function to make sure library is working
     testfunc();
+
+    // Test for mtu_writeFileOpen
+    test_mtu_writeFileOpen();
 
     // Test for mtu_canNegate
     test_mtu_canNegate();
