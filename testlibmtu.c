@@ -1,23 +1,35 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-// new file to test the library
-
 
 #include "libmtu.h"
 
-void test_mtu_writeFileOpen() {
+#define FOPEN 1
+#define OPEN 0
 
-    char filename[] = "openTestFile.txt";
-    char fileData[] = "Print this line to the file just to take up space.\n";
+void test_mtu_writeOpen(int openType) {
+
+
+    char* filename;
+    char fileData[] = "Print this line to the file just to take up space.";
     int retval;
     char string1[] = "string1";
     char string2[] = "string2";
-    int seekamt = 30;
+    int seekamt = 2;
     int delret;
 
     printf("\n");
-    printf("Running test for mtu_writeFileOpen\n");
+    if (openType == OPEN) {
+        printf("Running test for mtu_writeFileOpen\n");
+    } else {
+        printf("Running test for mtu_writeFileFopen\n");
+    }
+
+    if (openType == OPEN) {
+        filename = "openTestFile.txt";
+    } else {
+        filename = "fopenTestFile.txt";
+    }
 
     // create a file to write to
     FILE* fp = fopen(filename, "w+");
@@ -33,13 +45,26 @@ void test_mtu_writeFileOpen() {
     // close the file to allow function to access it
     fclose(fp);
 
-    // call mtu_writeFileOpen
-    retval = mtu_writeFileOpen(filename, string1, seekamt, string2);
+    // call mtu_writeOpen functions
+    if (openType == OPEN) {
+        retval = mtu_writeFileOpen(filename, string1, seekamt, string2);
+    } else {
+        retval = mtu_writeFileFopen(filename, string1, seekamt, string2);
+    }
+
     if (retval == 0) {
-        printf("mtu_writeFileOpen returns 1. It returned with %d. Failure.\n", retval);
+        if (openType == OPEN) {
+            printf("mtu_writeFileOpen returns 1. It returned with %d. Failure.\n", retval);
+        } else {
+            printf("mtu_writeFileFopen returns 1. It returned with %d. Failure.\n", retval);
+        }
     }
     else {
-        printf("mtu_writeFileOpen return %d. Success.\n", retval);
+        if (openType == OPEN) {
+            printf("mtu_writeFileOpen return %d. Success.\n", retval);
+        } else {
+            printf("mtu_writeFileFopen return %d. Success.\n", retval);
+        }
     }
 
     // delete the file
@@ -175,7 +200,10 @@ int main (void) {
     testfunc();
 
     // Test for mtu_writeFileOpen
-    test_mtu_writeFileOpen();
+    test_mtu_writeOpen(OPEN);
+
+    // Test for mtu_writeFileFopen
+    test_mtu_writeOpen(FOPEN);
 
     // Test for mtu_canNegate
     test_mtu_canNegate();
