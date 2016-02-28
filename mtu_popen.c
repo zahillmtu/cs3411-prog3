@@ -1,3 +1,6 @@
+#define _POSIX_C_SOURCE 2
+
+#include <stdlib.h>
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -5,15 +8,24 @@
 
 unsigned int mtu_popen() {
 
-    //char cmd[1024];
-    //// Get the pid number
-    //pid_t pidNum = getpid();
+    char cmd[1024];
+    unsigned int retNum = NULL;
+    FILE* pout;
+    // Get the pid number
+    pid_t pidNum = getpid();
 
-    //snprintf(cmd, sizeof(cmd), "ps -p %d -o rss=", pidNum);
+    snprintf(cmd, sizeof(cmd), "ps -p %d -o rss=", pidNum);
+    printf("cmd: %s\n", cmd);
 
-    //popen(cmd, no_idea);
+    pout = popen(cmd, "r");
+    if (pout == NULL) {
+        printf("Error using popen() - Exiting");
+        exit(1);
+    }
 
-    return 0;
+    fscanf(pout, "%u", &retNum);
+
+    return retNum;
 }
 
 /*

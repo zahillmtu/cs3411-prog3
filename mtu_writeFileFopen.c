@@ -19,6 +19,7 @@ int mtu_writeFileFopen(char *filename, char *string1, int seek, char *string2) {
     bytesWritten = fwrite(string1, 1, nbytes, fp);
     if (bytesWritten != nbytes) {
         printf("There was an error with fwrite\n");
+        fclose(fp);
         return 0; // There was an error
     }
 
@@ -26,6 +27,7 @@ int mtu_writeFileFopen(char *filename, char *string1, int seek, char *string2) {
     sreturn = fseek(fp, seek, SEEK_SET);
     if (sreturn == -1) {
         printf("There was an error with fseek\n");
+        fclose(fp);
         return 0; // There was an error
     }
 
@@ -34,6 +36,7 @@ int mtu_writeFileFopen(char *filename, char *string1, int seek, char *string2) {
     bytesWritten = fwrite(string2, 1, nbytes, fp);
     if (bytesWritten != nbytes) {
         printf("There was an error with fwrite\n");
+        fclose(fp);
         return 0; // There was an error
     }
 

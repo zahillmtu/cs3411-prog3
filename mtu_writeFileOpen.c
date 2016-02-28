@@ -14,7 +14,7 @@ int mtu_writeFileOpen(char* filename, char* string1, int seek, char *string2) {
     int creturn;
 
     // open the file to write, if exists truncate, if not there create
-    fd = open(filename, (O_WRONLY | O_CREAT | O_TRUNC));
+    fd = open(filename, (O_WRONLY | O_CREAT | O_TRUNC), (S_IRWXU | S_IRWXG));
     if (fd == -1) {
         return 0; // There was an error
     }

@@ -73,6 +73,25 @@ void test_mtu_writeOpen(int openType) {
         printf("Error deleting file - Exiting\n");
         exit(EXIT_FAILURE);
     }
+    return;
+}
+
+void test_mtu_popen() {
+
+    printf("\n");
+    printf("Running test for mtu_popen\n");
+
+    unsigned int testpopen;
+
+    testpopen = mtu_popen();
+    if (testpopen > 4000000000) {
+        // There was an error
+        printf("mtu_popen returned %u. Failure.\n", testpopen);
+    }
+    else {
+        printf("mtu_popen returned %u. Success.\n", testpopen);
+    }
+    return;
 }
 
 void test_mtu_canNegate() {
@@ -204,6 +223,9 @@ int main (void) {
 
     // Test for mtu_writeFileFopen
     test_mtu_writeOpen(FOPEN);
+
+    // Test for mtu_popen
+    test_mtu_popen();
 
     // Test for mtu_canNegate
     test_mtu_canNegate();
