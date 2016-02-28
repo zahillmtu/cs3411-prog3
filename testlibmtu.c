@@ -7,8 +7,47 @@
 #define FOPEN 1
 #define OPEN 0
 
-void test_mtu_writeOpen(int openType) {
+void test_mtu_countUTF8() {
 
+    printf("\n");
+    printf("Running test for mtu_countUTF8\n");
+
+    char filename[] = "utf_8_test.txt";
+    char utfchars[] = "n → ∞, ∑ f(i) = ∏ g(i)\n";
+    int delret;
+    int charCount;
+    int numOfChars = 22;
+
+    // create a file for testing
+    FILE* fp = fopen(filename, "w+");
+    if (fp == NULL) {
+        printf("Error creating a file for testing - Exiting\n");
+        exit(EXIT_FAILURE);
+    }
+
+    // place the chars into the file
+    fputs(utfchars, fp);
+    fclose(fp);
+
+    // call the test function
+    charCount = mtu_countUTF8(filename);
+    if (charCount == numOfChars) {
+        printf("mtu_countUTF8 returns with %d, returned with: %d. Success.\n", numOfChars, charCount);
+    }
+    else {
+        printf("mtu_countUTF8 returns with %d, returned with: %d. Failure.\n", numOfChars, charCount);
+    }
+
+    // delete the file
+    delret = remove(filename);
+    if (delret == -1) {
+        printf("Error deleting file - Exiting\n");
+        exit(EXIT_FAILURE);
+    }
+    return;
+}
+
+void test_mtu_writeOpen(int openType) {
 
     char* filename;
     char fileData[] = "Print this line to the file just to take up space.";
@@ -217,6 +256,9 @@ int main (void) {
 
     // test function to make sure library is working
     testfunc();
+
+    // Test for mtu_countUTF8
+    test_mtu_countUTF8();
 
     // Test for mtu_writeFileOpen
     test_mtu_writeOpen(OPEN);
