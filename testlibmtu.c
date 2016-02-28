@@ -131,11 +131,11 @@ void test_mtu_qsort() {
 
     printf("\n");
     printf("Running test for mtu_qsort\n");
-    int listSize = 5;
+    int listSize = 6;
     int sortedFailed = 0;
-    printf("Starting array = 1.0, 6.0, 9.3, 7.8, 2.2}\n");
-    float sortedList[] = {1.0, 2.2, 6.0, 7.8, 9.3}; // array for testing
-    float list[] = {1.0, 6.0, 9.3, 7.8, 2.2}; // array to be sorted
+    printf("Starting array = 1.2, 1.1, 6.0, 9.3, 7.8, 2.2}\n");
+    float sortedList[] = {1.1, 1.2, 2.2, 6.0, 7.8, 9.3}; // array for testing
+    float list[] = {1.2, 1.1, 6.0, 9.3, 7.8, 2.2}; // array to be sorted
     mtu_qsort(list, listSize);
     printf("Sorted array = ");
     for (int i = 0; i < listSize; i++) {

@@ -7,8 +7,8 @@
  */
 static int compFloat(const void* pa, const void* pb) {
 
-    int a = *(const int*)pa;
-    int b = *(const int*)pb;
+    float a = *(const float*)pa;
+    float b = *(const float*)pb;
 
     if (a < b) {
         return -1;
