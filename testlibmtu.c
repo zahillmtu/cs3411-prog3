@@ -119,10 +119,10 @@ void test_mtu_canDivide() {
     int divb = 5;
     int divans = mtu_canDivide(diva, divb);
     if (divans == 1) {
-        printf("mtu_canDivide(20, 4) returned with: %d. Success\n", divans);
+        printf("mtu_canDivide(%d, %d) returned with: %d. Success\n", diva, divb, divans);
     }
     else {
-        printf("mtu_canDivide(20, 4) returns 1. It returned with: %d. Failure\n", divans);
+        printf("mtu_canDivide(%d, %d) returns 1. It returned with: %d. Failure\n", diva, divb, divans);
     }
     return;
 }

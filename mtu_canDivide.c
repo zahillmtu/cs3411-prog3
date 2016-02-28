@@ -1,13 +1,14 @@
-#define UNUSED(x) (void)(x)
-
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
 int mtu_canDivide(int a, int b) {
 
-    UNUSED(a); // Not needed
-
     if (b == 0) {
+        // behavior will be undefined
+        return 0;
+    }
+    else if (a == INT_MIN && b == -1) {
         // behavior will be undefined
         return 0;
     }
