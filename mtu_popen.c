@@ -9,7 +9,7 @@
 unsigned int mtu_popen() {
 
     char cmd[1024];
-    unsigned int retNum = NULL;
+    unsigned int retNum;
     FILE* pout;
     // Get the pid number
     pid_t pidNum = getpid();

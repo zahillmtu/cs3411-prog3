@@ -15,8 +15,8 @@ void test_mtu_countUTF8() {
     char filename[] = "utf_8_test.txt";
     char utfchars[] = "n → ∞, ∑ f(i) = ∏ g(i)\n";
     int delret;
-    int charCount;
-    int numOfChars = 22;
+    unsigned int charCount;
+    unsigned int numOfChars = 22;
 
     // create a file for testing
     FILE* fp = fopen(filename, "w+");

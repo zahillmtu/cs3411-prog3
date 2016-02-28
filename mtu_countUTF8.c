@@ -1,16 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-unsigned int readOnes(FILE* fp, int intialCount) {
+unsigned int readOnes(FILE* fp, unsigned int intialCount) {
 
-    char mask = 1;
-    char temp;
-    char byte;
+    unsigned char mask = 1;
+    unsigned char temp = 0;
+    unsigned char byte = 0;
     unsigned int count = intialCount;
-    int readCheck;
+    int readCheck = 0;
 
     // Check the first value, if 0 return 1
-    readCheck = fread(&byte, sizeof(char), 1, fp);
+    readCheck = fread(&byte, sizeof(unsigned char), 1, fp);
     if (readCheck != 1) {
         printf("Error reading file - Exiting\n");
         exit(1);
@@ -18,13 +18,16 @@ unsigned int readOnes(FILE* fp, int intialCount) {
     if (byte == '\n') {
         return 0;
     }
-    if ((mask & (byte << 7)) == 0) {
+    if ((mask & (byte >> 7)) == 0) {
         return 1;
+    }
+    else { // found a 1 increment count
+        count = count + 1;
     }
 
     // Count the ones until you find a zero int the byte
     for (int i = 6; i >= 0; i--) {
-        temp = mask & (byte << i);
+        temp = (mask & (byte >> i));
         if (temp == 1) {
             count = count + 1;
         }
@@ -42,8 +45,8 @@ unsigned int readOnes(FILE* fp, int intialCount) {
 
 unsigned int mtu_countUTF8(char* bytes) {
 
-    unsigned int numOfOnes;
-    unsigned int count;
+    unsigned int numOfOnes = 0;
+    unsigned int count = 0;
 
     FILE* fp = fopen(bytes, "r");
     if (fp == NULL) {
@@ -60,11 +63,14 @@ unsigned int mtu_countUTF8(char* bytes) {
         }
 
         // skip that number of bytes, subtract off one for the byte intially read in readOnes
-        fseek(fp, numOfOnes - 1, SEEK_CUR);
+        if (numOfOnes > 1) {
+            fseek(fp, numOfOnes - 1, SEEK_CUR);
+        }
 
         // increment the count
-        count = count + numOfOnes;
+        count = count + 1;
     }
+    fclose(fp);
 
     // return the count
     return count;
