@@ -13,7 +13,7 @@ unsigned int readOnes(FILE* fp, unsigned int intialCount) {
     readCheck = fread(&byte, sizeof(unsigned char), 1, fp);
     if (readCheck != 1) {
         printf("Error reading file - Exiting\n");
-        exit(1);
+        return(1);
     }
     if (byte == '\n') {
         return 0;
@@ -36,7 +36,7 @@ unsigned int readOnes(FILE* fp, unsigned int intialCount) {
         }
         else {
             printf("There was an error, stream may not be UTF-8 compliant\n");
-            exit(1);
+            return(1);
         }
     }
     // if all ones than read in the next byte
@@ -51,7 +51,7 @@ unsigned int mtu_countUTF8(char* bytes) {
     FILE* fp = fopen(bytes, "r");
     if (fp == NULL) {
         printf("Error reading from file - Exiting\n");
-        exit(1);
+        return(1);
     }
 
     while (1) {

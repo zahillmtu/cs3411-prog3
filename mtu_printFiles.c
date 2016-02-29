@@ -7,6 +7,27 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+// This is going to have to be able to sort the entire struct
+// not just compare two values
+//int sizeSort(const struct dirent ** a, const struct dirent ** b) {
+//
+//    struct stat aInfo;
+//    struct stat bInfo;
+//
+//    stat(a->d_name, &aInfo);
+//    stat(b->d_name, &bInfo);
+//
+//    if (aInfo.st_size > bInfo.st_size) {
+//        return 1;
+//    }
+//    else if (aInfo.st_size < bInfo.st_size) {
+//        return -1;
+//    }
+//    else {
+//        return 0;
+//    }
+//
+//}
 
 int mtu_printFiles(void) {
 
@@ -16,7 +37,7 @@ int mtu_printFiles(void) {
     numOfFiles = scandir(".", &namelist, NULL, alphasort);
     if (numOfFiles == -1) {
         printf("There was an error reading the directory - Exiting\n");
-        exit(1);
+        return(1);
     }
 
     struct stat fileInfo;
@@ -25,7 +46,7 @@ int mtu_printFiles(void) {
 
         if (stat(namelist[i]->d_name, &fileInfo) == -1) {
             perror("stat");
-            exit(EXIT_FAILURE);
+            return(1);
         }
         printf("%s %lld\n", namelist[i]->d_name, (long long) fileInfo.st_size);
         free(namelist[i]);
