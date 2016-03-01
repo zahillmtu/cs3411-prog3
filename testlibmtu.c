@@ -12,7 +12,7 @@ void test_mtu_countUTF8() {
     printf("\n");
     printf("Running test for mtu_countUTF8\n");
 
-    char filename[] = "utf_8_test.txt";
+    char filename[] = "utf_8_demo.txt";
     char utfchars[] = "n → ∞, ∑ f(i) = ∏ g(i)\n";
     int delret;
     unsigned int charCount;
