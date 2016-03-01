@@ -24,6 +24,7 @@ int* mtu_pairSum(int a, ...) {
         // Create a new array to place the paired values into
         temp = (int*) calloc(count, sizeof(int));
         if (temp == NULL) {
+            va_end(params);
             printf("Error allocating memory - Exiting\n");
             return(NULL);
         }
@@ -40,6 +41,7 @@ int* mtu_pairSum(int a, ...) {
             ((first < 0) && (second < (INT_MIN - first)))) {
                 // There is an error
                 printf("Addition would cause undefined behavior - Exiting\n");
+                free(temp);
                 return(NULL);
         } else {
             temp[count - 1] = first + second;
@@ -55,7 +57,7 @@ int* mtu_pairSum(int a, ...) {
     temp = (int*) calloc(count + 1, sizeof(int));
     if (temp == NULL) {
         printf("Error allocating memory - Exiting\n");
-        exit(1);
+        returN(1);
     }
 
     // place everything into the new array
