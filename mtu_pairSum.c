@@ -57,7 +57,7 @@ int* mtu_pairSum(int a, ...) {
     temp = (int*) calloc(count + 1, sizeof(int));
     if (temp == NULL) {
         printf("Error allocating memory - Exiting\n");
-        returN(1);
+        return(NULL);
     }
 
     // place everything into the new array
