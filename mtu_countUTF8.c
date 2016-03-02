@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int BYTEINDEX = 0;
+unsigned int BYTEINDEX = 0;
 
 unsigned int readOnes(char* bytes, unsigned int intialCount) {
 
@@ -11,9 +11,8 @@ unsigned int readOnes(char* bytes, unsigned int intialCount) {
     unsigned int count = intialCount;
 
     // Check the first value, if 0 return 1
-    byte = bytes[BYTEINDEX];
-    BYTEINDEX = BYTEINDEX + 1;
-    if (byte == '\n') {
+    byte = (unsigned char) bytes[BYTEINDEX];
+    if (byte == 0) {
         return 0;
     }
     if ((mask & (byte >> 7)) == 0) {
@@ -55,8 +54,8 @@ unsigned int mtu_countUTF8(char* bytes) {
         }
 
         // skip that number of bytes, subtract off one for the byte intially read in readOnes
-        if (numOfOnes > 1) {
-            BYTEINDEX = BYTEINDEX + (numOfOnes - 1);
+        if (numOfOnes > 0) {
+            BYTEINDEX = BYTEINDEX + numOfOnes;
         }
 
         // increment the count

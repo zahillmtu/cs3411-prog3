@@ -12,9 +12,9 @@ void test_mtu_countUTF8() {
     printf("\n");
     printf("Running test for mtu_countUTF8\n");
 
-    char utfchars[] = "n → ∞, ∑ f(i) = ∏ g(i)\n";
+    char utfchars[] = "Helló Ẅorld, here is a beetle: 🐞";//"n → ∞, ∑ f(i) = ∏ g(i)"
     unsigned int charCount;
-    unsigned int numOfChars = 22;
+    unsigned int numOfChars = 32;
 
     // call the test function
     charCount = mtu_countUTF8(utfchars);
